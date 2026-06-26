@@ -1,4 +1,9 @@
-const PLC_SYMBOL = "PLC1.HMI.aRows";
+const PLC_DOMAIN = "PLC1";
+const PLC_GVL = "HMI";
+const PLC_ROW_COUNT = 8;
+const PLC_ACTIVE_COUNT_SYMBOL = `${PLC_DOMAIN}.${PLC_GVL}.nActiveRowCount`;
+const PLC_COMMIT_SYMBOL = `${PLC_DOMAIN}.${PLC_GVL}.bCommitRequested`;
+const PLC_ROW_FIELDS = ["nIndex", "sName", "lrValue", "bEnabled", "sUnit", "sSource"];
 const EXTENSION_SYMBOL = "TcHmiCSharpBridge.Variables";
 const STATUS_ID = "BridgeStatus";
 const GRID_ID = "VariableGrid";
@@ -75,6 +80,10 @@ function toExtensionRows(rows) {
     }));
 }
 
+function plcRowSymbol(rowNumber, fieldName) {
+    return `${PLC_DOMAIN}.${PLC_GVL}.aRows[${rowNumber}].${fieldName}`;
+}
+
 function readSymbol(symbolName) {
     return new Promise((resolve, reject) => {
         TcHmi.Server.readSymbol(symbolName, (data) => {
@@ -87,6 +96,15 @@ function readSymbol(symbolName) {
             reject(new Error(`Read failed: ${symbolName} (${formatError(data, result)})`));
         });
     });
+}
+
+function clampRowCount(value) {
+    const count = Number(value);
+    if (!Number.isFinite(count)) {
+        return PLC_ROW_COUNT;
+    }
+
+    return Math.max(0, Math.min(PLC_ROW_COUNT, Math.trunc(count)));
 }
 
 function writeSymbol(symbolName, value) {
@@ -144,18 +162,62 @@ function getGridRows() {
     return [];
 }
 
+async function readPlcRow(rowNumber) {
+    const row = {};
+    for (const fieldName of PLC_ROW_FIELDS) {
+        row[fieldName] = await readSymbol(plcRowSymbol(rowNumber, fieldName));
+    }
+
+    return normalizeRows([row], rowNumber - 1)[0];
+}
+
+async function readPlcRows() {
+    const activeRowCount = clampRowCount(await readSymbol(PLC_ACTIVE_COUNT_SYMBOL));
+    const rows = [];
+    for (let rowNumber = 1; rowNumber <= activeRowCount; rowNumber += 1) {
+        rows.push(await readPlcRow(rowNumber));
+    }
+
+    return rows;
+}
+
+async function writePlcRow(rowNumber, row) {
+    const value = denormalizeRows([row])[0];
+    await writeSymbol(plcRowSymbol(rowNumber, "nIndex"), Number(value.nIndex || rowNumber));
+    await writeSymbol(plcRowSymbol(rowNumber, "sName"), value.sName);
+    await writeSymbol(plcRowSymbol(rowNumber, "lrValue"), Number(value.lrValue));
+    await writeSymbol(plcRowSymbol(rowNumber, "bEnabled"), Boolean(value.bEnabled));
+    await writeSymbol(plcRowSymbol(rowNumber, "sUnit"), value.sUnit);
+    await writeSymbol(plcRowSymbol(rowNumber, "sSource"), value.sSource || "HMI");
+}
+
+async function writePlcRows(rows) {
+    const clippedRows = rows.slice(0, PLC_ROW_COUNT);
+    await writeSymbol(PLC_ACTIVE_COUNT_SYMBOL, clippedRows.length);
+
+    for (let rowNumber = 1; rowNumber <= clippedRows.length; rowNumber += 1) {
+        await writePlcRow(rowNumber, {
+            ...clippedRows[rowNumber - 1],
+            nIndex: rowNumber,
+            sSource: "HMI"
+        });
+    }
+
+    await writeSymbol(PLC_COMMIT_SYMBOL, true);
+}
+
 async function loadFromPlc() {
-    setStatus("Reading PLC rows...");
-    const plcRows = await readSymbol(PLC_SYMBOL);
-    setGridRows(normalizeRows(plcRows));
-    setStatus(`Loaded from ${PLC_SYMBOL}`);
+    setStatus("Reading PLC row fields...");
+    const plcRows = await readPlcRows();
+    setGridRows(plcRows);
+    setStatus(`Loaded ${plcRows.length} rows from ${PLC_DOMAIN}.${PLC_GVL}.aRows fields`);
 }
 
 async function writeToPlc() {
     const rows = getGridRows();
-    setStatus("Writing rows to PLC...");
-    await writeSymbol(PLC_SYMBOL, denormalizeRows(rows));
-    setStatus(`Wrote ${rows.length} rows to ${PLC_SYMBOL}`);
+    setStatus("Writing PLC row fields...");
+    await writePlcRows(rows);
+    setStatus(`Wrote ${Math.min(rows.length, PLC_ROW_COUNT)} rows to ${PLC_DOMAIN}.${PLC_GVL}.aRows fields`);
 }
 
 async function pushToExtension() {
@@ -227,7 +289,7 @@ function init() {
     bindButton("WritePlcButton", writeToPlc);
     bindButton("PushExtensionButton", pushToExtension);
     bindButton("PullExtensionButton", pullFromExtension);
-    setStatus("Bridge ready. Press Read PLC to load PLC1.HMI.aRows.");
+    setStatus(`Bridge ready. Press Read PLC to load ${PLC_DOMAIN}.${PLC_GVL}.aRows fields.`);
 }
 
 if (document.readyState === "loading") {

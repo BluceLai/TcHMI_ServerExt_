@@ -16,10 +16,11 @@ PLC `GVL HMI` <-> TwinCAT HMI DataGrid <-> C# TwinCAT HMI Server Extension
 
 The HMI script uses these default server symbols:
 
-- PLC: `PLC1.HMI.aRows`
+- PLC: `PLC1.HMI.nActiveRowCount` plus row fields like `PLC1.HMI.aRows[1].sName`
 - C#: `TcHmiCSharpBridge.Variables`
 
-If your ADS runtime name is not `PLC1`, change `PLC_SYMBOL` in `TcHMI/Scripts/Bridge.js`.
+If your ADS runtime name is not `PLC1`, change `PLC_DOMAIN` in `TcHMI/Scripts/Bridge.js`.
+The HMI reads and writes individual PLC fields instead of the complete `ARRAY OF STRUCT`; this is easier to diagnose and works better with TwinCAT HMI ADS symbol access.
 
 ## Build notes
 
@@ -28,7 +29,7 @@ If your ADS runtime name is not `PLC1`, change `PLC_SYMBOL` in `TcHMI/Scripts/Br
 3. Add/deploy the generated C# extension DLL through TwinCAT HMI Server Extension configuration if it is not picked up automatically by your engineering environment.
 4. Build and run the TwinCAT HMI project.
 
-The DataGrid uses indirect editing. Press `Write PLC` after editing rows to write the values back to `HMI.aRows`.
+The DataGrid uses indirect editing. Press `Write PLC` after editing rows to write the values back to `HMI.aRows[*]` fields.
 
 ## C# UI
 
