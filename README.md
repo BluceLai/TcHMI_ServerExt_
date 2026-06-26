@@ -32,7 +32,7 @@ The DataGrid uses indirect editing. Press `Write PLC` after editing rows to writ
 
 ## C# UI
 
-For debugging, open `TcHmiCSharpBridge.Ui.sln` instead of the full TwinCAT solution, select `Debug | Any CPU`, set `TcHmiCSharpBridge.Ui` as the startup project, and press F5. If Visual Studio still selects `TcHmiCSharpBridge.Shared`, right-click `TcHmiCSharpBridge.Ui` and choose `Set as Startup Project`; `Shared` is a class library and cannot be launched directly.
+For debugging, open `TcHmiCSharpBridge.Ui.sln` instead of the full TwinCAT solution, select `Debug | Any CPU`, and press F5. This solution only contains the executable WinForms project; `TcHmiCSharpBridge.Shared` remains referenced by the UI project but is no longer a launchable solution project.
 
 Run `TcHmiCSharpBridge.Ui` from Visual Studio to open a DataGridView for the C# side.
 

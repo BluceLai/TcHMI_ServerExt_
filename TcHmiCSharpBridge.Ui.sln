@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcHmiCSharpBridge.Ui", "TcHmiCSharpBridge.Ui\TcHmiCSharpBridge.Ui.csproj", "{FA693C16-2992-4E31-84C9-311E4FC9B95D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcHmiCSharpBridge.Shared", "TcHmiCSharpBridge.Shared\TcHmiCSharpBridge.Shared.csproj", "{92A6705F-63C0-49A7-B42C-352BE42267E9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,18 +15,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{92A6705F-63C0-49A7-B42C-352BE42267E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92A6705F-63C0-49A7-B42C-352BE42267E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92A6705F-63C0-49A7-B42C-352BE42267E9}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{92A6705F-63C0-49A7-B42C-352BE42267E9}.Debug|x64.Build.0 = Debug|Any CPU
-		{92A6705F-63C0-49A7-B42C-352BE42267E9}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{92A6705F-63C0-49A7-B42C-352BE42267E9}.Debug|x86.Build.0 = Debug|Any CPU
-		{92A6705F-63C0-49A7-B42C-352BE42267E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92A6705F-63C0-49A7-B42C-352BE42267E9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{92A6705F-63C0-49A7-B42C-352BE42267E9}.Release|x64.ActiveCfg = Release|Any CPU
-		{92A6705F-63C0-49A7-B42C-352BE42267E9}.Release|x64.Build.0 = Release|Any CPU
-		{92A6705F-63C0-49A7-B42C-352BE42267E9}.Release|x86.ActiveCfg = Release|Any CPU
-		{92A6705F-63C0-49A7-B42C-352BE42267E9}.Release|x86.Build.0 = Release|Any CPU
 		{FA693C16-2992-4E31-84C9-311E4FC9B95D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FA693C16-2992-4E31-84C9-311E4FC9B95D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA693C16-2992-4E31-84C9-311E4FC9B95D}.Debug|x64.ActiveCfg = Debug|Any CPU
