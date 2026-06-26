@@ -11,7 +11,7 @@ function getControls() {
     return TcHmi.Controls;
 }
 
-function setStatus(message) {
+function setStatus(message, attempts = 0) {
     const statusControl = getControls()?.get?.(STATUS_ID);
     if (statusControl?.setText !== undefined) {
         statusControl.setText(message);
@@ -21,6 +21,11 @@ function setStatus(message) {
     const element = document.getElementById(STATUS_ID);
     if (element !== null) {
         element.textContent = message;
+        return;
+    }
+
+    if (attempts < 50) {
+        window.setTimeout(() => setStatus(message, attempts + 1), 100);
     }
 }
 
@@ -73,12 +78,13 @@ function toExtensionRows(rows) {
 function readSymbol(symbolName) {
     return new Promise((resolve, reject) => {
         TcHmi.Server.readSymbol(symbolName, (data) => {
-            if (data?.error === TcHmi.Errors.NONE) {
-                resolve(data.value);
+            const result = data?.results?.[0];
+            if (data?.error === TcHmi.Errors.NONE && result?.error === TcHmi.Errors.NONE) {
+                resolve(result.value);
                 return;
             }
 
-            reject(new Error(`Read failed: ${symbolName}`));
+            reject(new Error(`Read failed: ${symbolName} (${formatError(data, result)})`));
         });
     });
 }
@@ -86,14 +92,36 @@ function readSymbol(symbolName) {
 function writeSymbol(symbolName, value) {
     return new Promise((resolve, reject) => {
         TcHmi.Server.writeSymbol(symbolName, value, (data) => {
-            if (data?.error === TcHmi.Errors.NONE) {
+            const result = data?.results?.[0];
+            if (data?.error === TcHmi.Errors.NONE && (result === undefined || result.error === TcHmi.Errors.NONE)) {
                 resolve();
                 return;
             }
 
-            reject(new Error(`Write failed: ${symbolName}`));
+            reject(new Error(`Write failed: ${symbolName} (${formatError(data, result)})`));
         });
     });
+}
+
+function formatError(data, result) {
+    const detail = result?.details ?? data?.details ?? data?.response?.error ?? result?.error ?? data?.error;
+    if (typeof detail === "string") {
+        return detail;
+    }
+
+    if (detail?.reason) {
+        return detail.reason;
+    }
+
+    if (detail?.message) {
+        return detail.message;
+    }
+
+    if (detail?.code !== undefined) {
+        return `code ${detail.code}`;
+    }
+
+    return "unknown error";
 }
 
 function setGridRows(rows) {
@@ -153,7 +181,13 @@ function bindButton(id, handler) {
         return;
     }
 
-    TcHmi.EventProvider.register(`${id}.onStatePressed`, () => {
+    let running = false;
+    const run = () => {
+        if (running) {
+            return;
+        }
+
+        running = true;
         const button = TcHmi.Controls.get(id);
         if (button?.setIsEnabled !== undefined) {
             button.setIsEnabled(false);
@@ -165,8 +199,27 @@ function bindButton(id, handler) {
                 if (button?.setIsEnabled !== undefined) {
                     button.setIsEnabled(true);
                 }
+                window.setTimeout(() => {
+                    running = false;
+                }, 100);
             });
-    });
+    };
+
+    TcHmi.EventProvider.register(`${id}.onStatePressed`, run);
+
+    bindDomButton(id, run);
+}
+
+function bindDomButton(id, run, attempts = 0) {
+    const element = document.getElementById(id);
+    if (element !== null) {
+        element.addEventListener("click", run);
+        return;
+    }
+
+    if (attempts < 50) {
+        window.setTimeout(() => bindDomButton(id, run, attempts + 1), 100);
+    }
 }
 
 function init() {
@@ -174,7 +227,7 @@ function init() {
     bindButton("WritePlcButton", writeToPlc);
     bindButton("PushExtensionButton", pushToExtension);
     bindButton("PullExtensionButton", pullFromExtension);
-    setStatus("Ready. Press Read PLC to load PLC1.HMI.aRows.");
+    setStatus("Bridge ready. Press Read PLC to load PLC1.HMI.aRows.");
 }
 
 if (document.readyState === "loading") {

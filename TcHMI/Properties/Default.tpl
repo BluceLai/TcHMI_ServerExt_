@@ -58,6 +58,7 @@
   <link rel="manifest" crossorigin="use-credentials" href="Properties/tchmimanifest.json">
   <link rel="icon" href="Images/Favicon.ico">
   {{GLOBAL_JS_INCLUDES}}
+  <script src="Scripts/Bridge.js" defer></script>
   <script>
 	 window.onload = function load() {
 		if ((!('TcHmi' in window) || !window.TcHmi.System) && document.body) {
