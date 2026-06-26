@@ -32,6 +32,8 @@ The DataGrid uses indirect editing. Press `Write PLC` after editing rows to writ
 
 ## C# UI
 
+For debugging, open `TcHmiCSharpBridge.Ui.sln` instead of the full TwinCAT solution, select `Debug | Any CPU`, set `TcHmiCSharpBridge.Ui` as the startup project, and press F5. This keeps the WinForms UI independent from TwinCAT HMI/PLC startup and avoids the Release optimized debugging warning.
+
 Run `TcHmiCSharpBridge.Ui` from Visual Studio to open a DataGridView for the C# side.
 
 - `Save` writes rows to the shared bridge store.
@@ -40,3 +42,9 @@ Run `TcHmiCSharpBridge.Ui` from Visual Studio to open a DataGridView for the C# 
 
 By default the shared JSON file is under `%LOCALAPPDATA%\TcHmiCSharpBridge\variables.json`.
 Set `TCHMI_BRIDGE_DATA_PATH` for both the HMI server process and the UI if you want a different shared location.
+
+## HMI Live / Publish
+
+`Desktop.view` uses TwinCAT HMI native controls (`TcHmiTextblock`, `TcHmiButton`, `TcHmiDatagrid`) instead of raw HTML buttons and containers. The DataGrid has sample rows, so a published page should show a visible table even before the PLC or C# extension is connected.
+
+If the HMI page is still blank after publishing, clear the browser cache or reload with Ctrl+F5, then confirm that `TcHMI/bin/App.js` exists after building.

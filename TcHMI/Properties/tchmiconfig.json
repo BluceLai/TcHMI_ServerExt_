@@ -63,7 +63,7 @@
     },
     {
       "name": "App.js",
-      "description": "",
+      "description": "TwinCAT HMI bridge button handlers",
       "type": "JavaScript"
     }
   ],

@@ -2,78 +2,34 @@ html,
 body {
   margin: 0;
   min-height: 100%;
-  font-family: Arial, sans-serif;
   background: #f4f6f8;
-  color: #1d252d;
 }
 
-.bridge-shell {
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 100%;
-  padding: 24px;
-}
-
-.bridge-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 14px;
+#Desktop {
+  background: #f4f6f8;
 }
 
 .bridge-title {
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1.2;
+  color: #1d252d;
 }
 
 .bridge-subtitle,
 .bridge-status {
-  margin-top: 6px;
   color: #5f6b76;
-  font-size: 13px;
 }
 
-.bridge-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.bridge-button {
+.bridge-action-button {
   border: 1px solid #b8c3cc;
-  border-radius: 4px;
   background: #ffffff;
-  color: #1d252d;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1;
-  min-height: 34px;
-  padding: 0 14px;
 }
 
-.bridge-button.primary {
+.bridge-action-primary {
   border-color: #1976d2;
   background: #1976d2;
   color: #ffffff;
 }
 
-.bridge-button:disabled {
-  cursor: default;
-  opacity: 0.55;
-}
-
-.bridge-grid-wrap {
-  position: relative;
-  height: calc(100vh - 132px);
-  min-height: 360px;
+.bridge-grid {
   border: 1px solid #cbd3da;
   background: #ffffff;
-}
-
-#VariableGrid {
-  position: absolute;
-  inset: 0;
 }

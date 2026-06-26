@@ -2,14 +2,25 @@ const PLC_SYMBOL = "PLC1.HMI.aRows";
 const EXTENSION_SYMBOL = "TcHmiCSharpBridge.Variables";
 const STATUS_ID = "BridgeStatus";
 const GRID_ID = "VariableGrid";
+function getControls() {
+    if (typeof TcHmi === "undefined") {
+        return null;
+    }
+    return TcHmi.Controls;
+}
 function setStatus(message) {
+    const statusControl = getControls()?.get?.(STATUS_ID);
+    if (statusControl?.setText !== undefined) {
+        statusControl.setText(message);
+        return;
+    }
     const element = document.getElementById(STATUS_ID);
     if (element !== null) {
         element.textContent = message;
     }
 }
 function getGrid() {
-    const controls = TcHmi?.Controls;
+    const controls = getControls();
     if (controls?.get !== undefined) {
         return controls.get(GRID_ID);
     }
@@ -78,6 +89,9 @@ function setGridRows(rows) {
 }
 function getGridRows() {
     const grid = getGrid();
+    if (grid?.writePreparedValues !== undefined) {
+        grid.writePreparedValues();
+    }
     if (grid?.getSrcData !== undefined) {
         return normalizeRows(grid.getSrcData());
     }
@@ -111,16 +125,21 @@ async function pullFromExtension() {
     setStatus(`Loaded from ${EXTENSION_SYMBOL}`);
 }
 function bindButton(id, handler) {
-    const button = document.getElementById(id);
-    if (button === null) {
+    if (typeof TcHmi === "undefined" || TcHmi.EventProvider === undefined) {
+        window.setTimeout(() => bindButton(id, handler), 100);
         return;
     }
-    button.addEventListener("click", () => {
-        button.disabled = true;
+    TcHmi.EventProvider.register(`${id}.onStatePressed`, () => {
+        const button = TcHmi.Controls.get(id);
+        if (button?.setIsEnabled !== undefined) {
+            button.setIsEnabled(false);
+        }
         handler()
             .catch((error) => setStatus(error.message))
             .finally(() => {
-            button.disabled = false;
+            if (button?.setIsEnabled !== undefined) {
+                button.setIsEnabled(true);
+            }
         });
     });
 }
@@ -129,7 +148,7 @@ function init() {
     bindButton("WritePlcButton", writeToPlc);
     bindButton("PushExtensionButton", pushToExtension);
     bindButton("PullExtensionButton", pullFromExtension);
-    void loadFromPlc().catch((error) => setStatus(error.message));
+    setStatus("Ready. Press Read PLC / Pull C# to load live values.");
 }
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
