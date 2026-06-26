@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>TcHmiCSharpBridge</RootNamespace>
+    <AssemblyName>TcHmiCSharpBridge</AssemblyName>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="TcHmiSrvExtNet.Core">
+      <HintPath>..\Packages\Beckhoff.TwinCAT.HMI.Server.Engineering.22.0.7791\runtimes\any\native\3.2.7791.0\TcHmiSrvExtNet.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

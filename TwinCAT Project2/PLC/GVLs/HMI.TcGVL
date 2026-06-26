@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="HMI" Id="{0edd48db-c6f9-436f-a489-9774922d70d9}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+    aRows : ARRAY[1..8] OF ST_HmiRow := [
+        (nIndex := 1, sName := 'SpeedSetpoint', lrValue := 120.0, bEnabled := TRUE, sUnit := 'mm/s', sSource := 'PLC'),
+        (nIndex := 2, sName := 'PressureLimit', lrValue := 5.5, bEnabled := TRUE, sUnit := 'bar', sSource := 'PLC'),
+        (nIndex := 3, sName := 'BatchCount', lrValue := 12.0, bEnabled := TRUE, sUnit := 'pcs', sSource := 'PLC'),
+        (nIndex := 4, sName := 'Temperature', lrValue := 36.5, bEnabled := FALSE, sUnit := 'degC', sSource := 'PLC'),
+        (nIndex := 5, sName := 'VacuumLevel', lrValue := -0.65, bEnabled := TRUE, sUnit := 'bar', sSource := 'PLC'),
+        (nIndex := 6, sName := 'CycleDelay', lrValue := 250.0, bEnabled := FALSE, sUnit := 'ms', sSource := 'PLC'),
+        (nIndex := 7, sName := 'RetryLimit', lrValue := 3.0, bEnabled := TRUE, sUnit := 'count', sSource := 'PLC'),
+        (nIndex := 8, sName := 'RecipeNumber', lrValue := 1.0, bEnabled := TRUE, sUnit := 'id', sSource := 'PLC')
+    ];
+    nActiveRowCount : UINT := 8;
+    nLastChangedIndex : UINT := 0;
+    bCommitRequested : BOOL := FALSE;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

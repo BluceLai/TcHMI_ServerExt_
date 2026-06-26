@@ -1,0 +1,33 @@
+.vs/
+.engineering_servers/
+.dotnet_home/
+Packages/
+packages/
+
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+*.user
+*.suo
+*.cache
+*.log
+*.tmp
+*.bak
+*.pdb
+*.nupkg
+
+TcHMI/bin/
+TcHMI/**/*.d.ts
+TcHMI/**/*.js.map
+TcHMI/tchmipublish.journal.json
+TcHMI/liveview_*
+TcHMI/**/.hmiframework/
+TcHMI/**/.hmipkgs/
+
+TwinCAT Project2/**/*.compileinfo
+TwinCAT Project2/**/*.tmc
+TwinCAT Project2/**/*.tpy

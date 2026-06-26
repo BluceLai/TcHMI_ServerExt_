@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_HmiRow" Id="{a7df6fcf-7a89-46b1-a1aa-1e58d50bfca8}">
+    <Declaration><![CDATA[TYPE ST_HmiRow :
+STRUCT
+    nIndex : UINT;
+    sName : STRING(40);
+    lrValue : LREAL;
+    bEnabled : BOOL;
+    sUnit : STRING(16);
+    sSource : STRING(16);
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

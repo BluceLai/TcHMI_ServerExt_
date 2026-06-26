@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="MAIN" Id="{05e99101-4700-42f4-bae8-a8fb1c0f4e70}">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+    nIndex : UINT;
+END_VAR
+]]>
+    </Declaration>
+    <Implementation>
+      <ST><![CDATA[IF HMI.bCommitRequested THEN
+    FOR nIndex := 1 TO HMI.nActiveRowCount DO
+        HMI.aRows[nIndex].nIndex := nIndex;
+        HMI.aRows[nIndex].sSource := 'PLC';
+    END_FOR
+
+    HMI.nLastChangedIndex := HMI.nActiveRowCount;
+    HMI.bCommitRequested := FALSE;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
