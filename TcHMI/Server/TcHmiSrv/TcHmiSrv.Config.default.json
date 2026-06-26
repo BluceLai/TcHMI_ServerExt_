@@ -598,7 +598,7 @@
                                 },
                                 "type": "object",
                                 "versions": [
-                                    1.0
+                                    1
                                 ]
                             },
                             {
@@ -683,7 +683,7 @@
                                 ],
                                 "type": "object",
                                 "versions": [
-                                    2.0
+                                    2
                                 ]
                             }
                         ]
@@ -790,6 +790,23 @@
             "OPTIONS": {},
             "SCHEMA": {
                 "function": true
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.0.bEnabled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[0]::bEnabled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 4
+                    }
+                ]
             },
             "USEMAPPING": true
         },
@@ -1065,8 +1082,8 @@
                 "function": true,
                 "type": "object",
                 "versions": [
-                    1.0,
-                    2.0
+                    1,
+                    2
                 ],
                 "writeValue": {
                     "properties": {
@@ -1274,8 +1291,8 @@
             "SCHEMA": {
                 "function": true,
                 "versions": [
-                    1.0,
-                    2.0
+                    1,
+                    2
                 ],
                 "writeValue": {
                     "$ref": "tchmi:server#/definitions/event"
@@ -1735,7 +1752,7 @@
                     {
                         "function": true,
                         "versions": [
-                            1.0
+                            1
                         ],
                         "writeValue": {
                             "properties": {
@@ -1771,7 +1788,7 @@
                     {
                         "function": true,
                         "versions": [
-                            2.0
+                            2
                         ],
                         "writeValue": {
                             "properties": {
@@ -1908,7 +1925,7 @@
                         "function": true,
                         "type": "string",
                         "versions": [
-                            1.0
+                            1
                         ],
                         "writeValue": {
                             "properties": {
@@ -1947,7 +1964,7 @@
                         ],
                         "type": "object",
                         "versions": [
-                            2.0
+                            2
                         ],
                         "writeValue": {
                             "properties": {
@@ -2333,7 +2350,7 @@
                         "function": true,
                         "type": "object",
                         "versions": [
-                            1.0
+                            1
                         ],
                         "writeValue": {
                             "anyOf": [
@@ -2371,7 +2388,7 @@
                         "function": true,
                         "type": "object",
                         "versions": [
-                            2.0
+                            2
                         ],
                         "writeValue": {
                             "additionalProperties": false,
@@ -2394,7 +2411,7 @@
                             ],
                             "type": "object",
                             "versions": [
-                                2.0
+                                2
                             ]
                         }
                     }
@@ -2585,7 +2602,7 @@
                         },
                         "type": "array",
                         "versions": [
-                            1.0
+                            1
                         ]
                     },
                     {
@@ -2623,7 +2640,7 @@
                         },
                         "type": "array",
                         "versions": [
-                            2.0
+                            2
                         ]
                     }
                 ]
@@ -3743,6 +3760,839 @@
             },
             "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.nActiveRowCount": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::nActiveRowCount",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/UINT"
+                    },
+                    {
+                        "propertyOrder": 0
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.bCommitRequested": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::bCommitRequested",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 7
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.0.nIndex": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[0]::nIndex",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/UINT"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.0.sName": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[0]::sName",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.0.lrValue": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[0]::lrValue",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/LREAL"
+                    },
+                    {
+                        "propertyOrder": 3
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.0.sUnit": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[0]::sUnit",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 5
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.0.sSource": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[0]::sSource",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 6
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.1.nIndex": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[1]::nIndex",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/UINT"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.1.sName": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[1]::sName",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.1.lrValue": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[1]::lrValue",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/LREAL"
+                    },
+                    {
+                        "propertyOrder": 3
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.1.bEnabled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[1]::bEnabled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 4
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.1.sUnit": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[1]::sUnit",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 5
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.1.sSource": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[1]::sSource",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 6
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.2.nIndex": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[2]::nIndex",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/UINT"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.2.sName": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[2]::sName",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.2.lrValue": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[2]::lrValue",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/LREAL"
+                    },
+                    {
+                        "propertyOrder": 3
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.2.bEnabled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[2]::bEnabled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 4
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.2.sUnit": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[2]::sUnit",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 5
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.2.sSource": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[2]::sSource",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 6
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.3.nIndex": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[3]::nIndex",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/UINT"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.3.sName": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[3]::sName",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.3.lrValue": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[3]::lrValue",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/LREAL"
+                    },
+                    {
+                        "propertyOrder": 3
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.3.bEnabled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[3]::bEnabled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 4
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.3.sUnit": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[3]::sUnit",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 5
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.3.sSource": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[3]::sSource",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 6
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.4.nIndex": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[4]::nIndex",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/UINT"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.4.sName": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[4]::sName",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.4.lrValue": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[4]::lrValue",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/LREAL"
+                    },
+                    {
+                        "propertyOrder": 3
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.4.bEnabled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[4]::bEnabled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 4
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.4.sUnit": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[4]::sUnit",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 5
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.4.sSource": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[4]::sSource",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 6
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.5.nIndex": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[5]::nIndex",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/UINT"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.5.sName": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[5]::sName",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.5.lrValue": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[5]::lrValue",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/LREAL"
+                    },
+                    {
+                        "propertyOrder": 3
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.5.bEnabled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[5]::bEnabled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 4
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.5.sUnit": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[5]::sUnit",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 5
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.5.sSource": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[5]::sSource",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 6
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.6.nIndex": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[6]::nIndex",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/UINT"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.6.sName": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[6]::sName",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.6.lrValue": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[6]::lrValue",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/LREAL"
+                    },
+                    {
+                        "propertyOrder": 3
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.6.bEnabled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[6]::bEnabled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 4
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.6.sUnit": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[6]::sUnit",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 5
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.6.sSource": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[6]::sSource",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 6
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.7.nIndex": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[7]::nIndex",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/UINT"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.7.sName": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[7]::sName",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.7.lrValue": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[7]::lrValue",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/LREAL"
+                    },
+                    {
+                        "propertyOrder": 3
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.7.bEnabled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[7]::bEnabled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 4
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.7.sUnit": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[7]::sUnit",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 5
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.aRows.7.sSource": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::aRows[7]::sSource",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING"
+                    },
+                    {
+                        "propertyOrder": 6
+                    }
+                ]
+            },
+            "USEMAPPING": true
         }
     },
     "SYMBOL_COMPLEXITY_LIMIT": 100,
@@ -3801,6 +4651,7 @@
                 "ADS.AdsSyncReadStateReq": 3,
                 "ADS.CheckLicense": 3,
                 "ADS.Diagnostics": 3,
+                "ADS.PLC1.HMI.aRows.0.bEnabled": 3,
                 "ChangeUserSettings": 3,
                 "ConfirmAlarm": 3,
                 "CreateEvent": 3,
@@ -3835,7 +4686,56 @@
                 "Unsubscribe": 3,
                 "UnsubscribeEvents": 3,
                 "UpdateEventsSubscription": 3,
-                "UserSelectType": 1
+                "UserSelectType": 1,
+                "ADS.PLC1.HMI.nActiveRowCount": 3,
+                "ADS.PLC1.HMI.bCommitRequested": 3,
+                "ADS.PLC1.HMI.aRows.0.nIndex": 3,
+                "ADS.PLC1.HMI.aRows.0.sName": 3,
+                "ADS.PLC1.HMI.aRows.0.lrValue": 3,
+                "ADS.PLC1.HMI.aRows.0.sUnit": 3,
+                "ADS.PLC1.HMI.aRows.0.sSource": 3,
+                "ADS.PLC1.HMI.aRows.1.nIndex": 3,
+                "ADS.PLC1.HMI.aRows.1.sName": 3,
+                "ADS.PLC1.HMI.aRows.1.lrValue": 3,
+                "ADS.PLC1.HMI.aRows.1.bEnabled": 3,
+                "ADS.PLC1.HMI.aRows.1.sUnit": 3,
+                "ADS.PLC1.HMI.aRows.1.sSource": 3,
+                "ADS.PLC1.HMI.aRows.2.nIndex": 3,
+                "ADS.PLC1.HMI.aRows.2.sName": 3,
+                "ADS.PLC1.HMI.aRows.2.lrValue": 3,
+                "ADS.PLC1.HMI.aRows.2.bEnabled": 3,
+                "ADS.PLC1.HMI.aRows.2.sUnit": 3,
+                "ADS.PLC1.HMI.aRows.2.sSource": 3,
+                "ADS.PLC1.HMI.aRows.3.nIndex": 3,
+                "ADS.PLC1.HMI.aRows.3.sName": 3,
+                "ADS.PLC1.HMI.aRows.3.lrValue": 3,
+                "ADS.PLC1.HMI.aRows.3.bEnabled": 3,
+                "ADS.PLC1.HMI.aRows.3.sUnit": 3,
+                "ADS.PLC1.HMI.aRows.3.sSource": 3,
+                "ADS.PLC1.HMI.aRows.4.nIndex": 3,
+                "ADS.PLC1.HMI.aRows.4.sName": 3,
+                "ADS.PLC1.HMI.aRows.4.lrValue": 3,
+                "ADS.PLC1.HMI.aRows.4.bEnabled": 3,
+                "ADS.PLC1.HMI.aRows.4.sUnit": 3,
+                "ADS.PLC1.HMI.aRows.4.sSource": 3,
+                "ADS.PLC1.HMI.aRows.5.nIndex": 3,
+                "ADS.PLC1.HMI.aRows.5.sName": 3,
+                "ADS.PLC1.HMI.aRows.5.lrValue": 3,
+                "ADS.PLC1.HMI.aRows.5.bEnabled": 3,
+                "ADS.PLC1.HMI.aRows.5.sUnit": 3,
+                "ADS.PLC1.HMI.aRows.5.sSource": 3,
+                "ADS.PLC1.HMI.aRows.6.nIndex": 3,
+                "ADS.PLC1.HMI.aRows.6.sName": 3,
+                "ADS.PLC1.HMI.aRows.6.lrValue": 3,
+                "ADS.PLC1.HMI.aRows.6.bEnabled": 3,
+                "ADS.PLC1.HMI.aRows.6.sUnit": 3,
+                "ADS.PLC1.HMI.aRows.6.sSource": 3,
+                "ADS.PLC1.HMI.aRows.7.nIndex": 3,
+                "ADS.PLC1.HMI.aRows.7.sName": 3,
+                "ADS.PLC1.HMI.aRows.7.lrValue": 3,
+                "ADS.PLC1.HMI.aRows.7.bEnabled": 3,
+                "ADS.PLC1.HMI.aRows.7.sUnit": 3,
+                "ADS.PLC1.HMI.aRows.7.sSource": 3
             }
         }
     },

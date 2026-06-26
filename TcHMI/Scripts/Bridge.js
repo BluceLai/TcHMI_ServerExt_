@@ -1,8 +1,9 @@
 const PLC_DOMAIN = "PLC1";
 const PLC_GVL = "HMI";
 const PLC_ROW_COUNT = 8;
-const PLC_ACTIVE_COUNT_SYMBOL = `${PLC_DOMAIN}.${PLC_GVL}.nActiveRowCount`;
-const PLC_COMMIT_SYMBOL = `${PLC_DOMAIN}.${PLC_GVL}.bCommitRequested`;
+const PLC_MAPPED_PREFIX = `ADS.${PLC_DOMAIN}.${PLC_GVL}`;
+const PLC_ACTIVE_COUNT_SYMBOL = `${PLC_MAPPED_PREFIX}.nActiveRowCount`;
+const PLC_COMMIT_SYMBOL = `${PLC_MAPPED_PREFIX}.bCommitRequested`;
 const PLC_ROW_FIELDS = ["nIndex", "sName", "lrValue", "bEnabled", "sUnit", "sSource"];
 const EXTENSION_SYMBOL = "TcHmiCSharpBridge.Variables";
 const STATUS_ID = "BridgeStatus";
@@ -81,7 +82,7 @@ function toExtensionRows(rows) {
 }
 
 function plcRowSymbol(rowNumber, fieldName) {
-    return `${PLC_DOMAIN}.${PLC_GVL}.aRows[${rowNumber}].${fieldName}`;
+    return `${PLC_MAPPED_PREFIX}.aRows.${rowNumber - 1}.${fieldName}`;
 }
 
 function readSymbol(symbolName) {
@@ -210,14 +211,14 @@ async function loadFromPlc() {
     setStatus("Reading PLC row fields...");
     const plcRows = await readPlcRows();
     setGridRows(plcRows);
-    setStatus(`Loaded ${plcRows.length} rows from ${PLC_DOMAIN}.${PLC_GVL}.aRows fields`);
+    setStatus(`Loaded ${plcRows.length} rows from ${PLC_MAPPED_PREFIX}.aRows mapped fields`);
 }
 
 async function writeToPlc() {
     const rows = getGridRows();
     setStatus("Writing PLC row fields...");
     await writePlcRows(rows);
-    setStatus(`Wrote ${Math.min(rows.length, PLC_ROW_COUNT)} rows to ${PLC_DOMAIN}.${PLC_GVL}.aRows fields`);
+    setStatus(`Wrote ${Math.min(rows.length, PLC_ROW_COUNT)} rows to ${PLC_MAPPED_PREFIX}.aRows mapped fields`);
 }
 
 async function pushToExtension() {
@@ -289,7 +290,7 @@ function init() {
     bindButton("WritePlcButton", writeToPlc);
     bindButton("PushExtensionButton", pushToExtension);
     bindButton("PullExtensionButton", pullFromExtension);
-    setStatus(`Bridge ready. Press Read PLC to load ${PLC_DOMAIN}.${PLC_GVL}.aRows fields.`);
+    setStatus(`Bridge ready. Press Read PLC to load ${PLC_MAPPED_PREFIX}.aRows mapped fields.`);
 }
 
 if (document.readyState === "loading") {
