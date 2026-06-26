@@ -8,7 +8,7 @@ PLC `GVL HMI` <-> TwinCAT HMI DataGrid <-> C# TwinCAT HMI Server Extension
 
 - PLC DUT `ST_HmiRow` and global array `HMI.aRows`.
 - `Desktop.view` with a TwinCAT HMI `TcHmiDatagrid`.
-- `TcHMI/App.ts` for reading/writing PLC ADS symbols and the C# extension symbol.
+- `TcHMI/Scripts/Bridge.js` for reading/writing PLC ADS symbols and the C# extension symbol.
 - `TcHmiCSharpBridge` C# Server Extension project exposing `TcHmiCSharpBridge.Variables`.
 - `TcHmiCSharpBridge.Ui` WinForms tool for viewing and editing the same C# bridge rows.
 
@@ -19,7 +19,7 @@ The HMI script uses these default server symbols:
 - PLC: `PLC1.HMI.aRows`
 - C#: `TcHmiCSharpBridge.Variables`
 
-If your ADS runtime name is not `PLC1`, change `PLC_SYMBOL` in `TcHMI/App.ts`.
+If your ADS runtime name is not `PLC1`, change `PLC_SYMBOL` in `TcHMI/Scripts/Bridge.js`.
 
 ## Build notes
 
@@ -32,7 +32,7 @@ The DataGrid uses indirect editing. Press `Write PLC` after editing rows to writ
 
 ## C# UI
 
-For debugging, open `TcHmiCSharpBridge.Ui.sln` instead of the full TwinCAT solution, select `Debug | Any CPU`, set `TcHmiCSharpBridge.Ui` as the startup project, and press F5. This keeps the WinForms UI independent from TwinCAT HMI/PLC startup and avoids the Release optimized debugging warning.
+For debugging, open `TcHmiCSharpBridge.Ui.sln` instead of the full TwinCAT solution, select `Debug | Any CPU`, set `TcHmiCSharpBridge.Ui` as the startup project, and press F5. If Visual Studio still selects `TcHmiCSharpBridge.Shared`, right-click `TcHmiCSharpBridge.Ui` and choose `Set as Startup Project`; `Shared` is a class library and cannot be launched directly.
 
 Run `TcHmiCSharpBridge.Ui` from Visual Studio to open a DataGridView for the C# side.
 
@@ -47,4 +47,4 @@ Set `TCHMI_BRIDGE_DATA_PATH` for both the HMI server process and the UI if you w
 
 `Desktop.view` uses TwinCAT HMI native controls (`TcHmiTextblock`, `TcHmiButton`, `TcHmiDatagrid`) instead of raw HTML buttons and containers. The DataGrid has sample rows, so a published page should show a visible table even before the PLC or C# extension is connected.
 
-If the HMI page is still blank after publishing, clear the browser cache or reload with Ctrl+F5, then confirm that `TcHMI/bin/App.js` exists after building.
+If the HMI page is still blank after publishing, clear the browser cache or reload with Ctrl+F5, then confirm that `TcHMI/bin/Scripts/Bridge.js` exists after building.

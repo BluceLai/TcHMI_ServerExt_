@@ -135,6 +135,7 @@
     <Folder Include="Imports\Videos" />
     <Folder Include="KeyboardLayouts\" />
     <Folder Include="Localization" />
+    <Folder Include="Scripts\" />
     <Folder Include="Themes" />
     <Folder Include="Themes\Base-Dark\Images\" />
     <Folder Include="Themes\Base\" />
@@ -330,15 +331,10 @@
       <SubType>Content</SubType>
       <Visible>true</Visible>
     </Content>
-    <Content Include="App.js">
+    <Content Include="Scripts\Bridge.js">
       <SubType>Content</SubType>
       <Visible>false</Visible>
-      <DependentUpon>App.ts</DependentUpon>
     </Content>
-    <TypeScriptCompile Include="App.ts">
-      <SubType>Code</SubType>
-      <Visible>true</Visible>
-    </TypeScriptCompile>
     <Folder Include="Server\ADS\" />
     <Folder Include="Server\TcHmiLua\" />
     <Folder Include="Server\TcHmiSqliteLogger\" />

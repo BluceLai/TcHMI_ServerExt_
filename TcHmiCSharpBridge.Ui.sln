@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcHmiCSharpBridge.Shared", "TcHmiCSharpBridge.Shared\TcHmiCSharpBridge.Shared.csproj", "{92A6705F-63C0-49A7-B42C-352BE42267E9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcHmiCSharpBridge.Ui", "TcHmiCSharpBridge.Ui\TcHmiCSharpBridge.Ui.csproj", "{FA693C16-2992-4E31-84C9-311E4FC9B95D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcHmiCSharpBridge.Shared", "TcHmiCSharpBridge.Shared\TcHmiCSharpBridge.Shared.csproj", "{92A6705F-63C0-49A7-B42C-352BE42267E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
