@@ -58,12 +58,12 @@
     },
     {
       "name": "App.css",
-      "description": "Layout for the PLC/HMI/C# bridge view.",
+      "description": "",
       "type": "Stylesheet"
     },
     {
       "name": "App.js",
-      "description": "Runtime bridge logic for PLC and C# server extension symbols.",
+      "description": "",
       "type": "JavaScript"
     }
   ],

@@ -1,4 +1,4 @@
-namespace TcHmiCSharpBridge;
+namespace TcHmiCSharpBridge.Shared;
 
 public sealed class BridgeVariable
 {

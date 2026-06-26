@@ -2,6 +2,7 @@ using TcHmiSrv.Core;
 using TcHmiSrv.Core.Tools.StaticSymbols;
 using TcHmiSrv.Core.Tools.TypeAttribute;
 using TcHmiCSharpBridge;
+using TcHmiCSharpBridge.Shared;
 
 [assembly: ServerExtensionType(typeof(BridgeExtension))]
 [assembly: ExportSymbol(

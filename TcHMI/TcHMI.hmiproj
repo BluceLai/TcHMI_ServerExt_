@@ -330,6 +330,11 @@
       <SubType>Content</SubType>
       <Visible>true</Visible>
     </Content>
+    <Content Include="App.js">
+      <SubType>Content</SubType>
+      <Visible>false</Visible>
+      <DependentUpon>App.ts</DependentUpon>
+    </Content>
     <TypeScriptCompile Include="App.ts">
       <SubType>Code</SubType>
       <Visible>true</Visible>

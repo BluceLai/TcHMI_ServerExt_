@@ -31,3 +31,4 @@ TcHMI/**/.hmipkgs/
 TwinCAT Project2/**/*.compileinfo
 TwinCAT Project2/**/*.tmc
 TwinCAT Project2/**/*.tpy
+TwinCAT Project2/_Boot/

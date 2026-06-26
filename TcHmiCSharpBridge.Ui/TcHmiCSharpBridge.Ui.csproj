@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>TcHmiCSharpBridge.Ui</RootNamespace>
+    <AssemblyName>TcHmiCSharpBridge.Ui</AssemblyName>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TcHmiCSharpBridge.Shared\TcHmiCSharpBridge.Shared.csproj" />
+  </ItemGroup>
+</Project>
