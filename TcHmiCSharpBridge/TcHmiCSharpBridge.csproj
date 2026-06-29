@@ -9,8 +9,24 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <TcHmiProjectFileVersion>1.0.0.0</TcHmiProjectFileVersion>
+    <TcHmiExtensionTypes>{5DF3DCF0-60A1-4102-985E-1810812D0E69}</TcHmiExtensionTypes>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <ProjectGuid>1f423059-b799-4e15-870a-63e9b5dbdbaa</ProjectGuid>
+  </PropertyGroup>
+
   <ItemGroup>
+    <Content Include="config\*.json">
+      <TargetPath>%(Filename)%(Extension)</TargetPath>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <ProjectReference Include="..\TcHmiCSharpBridge.Shared\TcHmiCSharpBridge.Shared.csproj" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Packages\Beckhoff.TwinCAT.HMI.Server.Engineering.22.0.7791\runtimes\any\native\3.2.7791.0\net8.0-windows\Newtonsoft.Json.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
     <Reference Include="TcHmiSrvExtNet.Core">
       <HintPath>..\Packages\Beckhoff.TwinCAT.HMI.Server.Engineering.22.0.7791\runtimes\any\native\3.2.7791.0\TcHmiSrvExtNet.Core.dll</HintPath>
       <Private>false</Private>

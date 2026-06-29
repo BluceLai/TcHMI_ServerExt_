@@ -1,0 +1,9 @@
+{
+  "$schema": "Language.Schema.json",
+  "locale": "en",
+  "localizedText": {
+    "MESSAGE_INIT": "Initializing extension TcHmiCSharpBridge succeeded.",
+    "ERROR_INIT": "Initializing extension TcHmiCSharpBridge failed. Additional information: {0}",
+    "ERROR_CALL_COMMAND": "Calling command {0} failed. Additional information: {1}"
+  }
+}

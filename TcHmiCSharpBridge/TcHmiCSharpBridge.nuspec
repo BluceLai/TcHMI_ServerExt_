@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>TcHmiCSharpBridge</id>
+    <version>1.0.0.0</version>
+    <description>TwinCAT HMI server extension that exposes bridge variables for PLC, HMI DataGrid, and C# UI synchronization.</description>
+    <authors>BluceLai</authors>
+    <title>TcHmiCSharpBridge</title>
+    <owners>BluceLai</owners>
+    <projectUrl>https://github.com/BluceLai/TcHMI_ServerExt_</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <copyright>BluceLai</copyright>
+    <tags>TwinCAT HMI Server Extension CSharp</tags>
+    <dependencies>
+      <group targetFramework="net8.0-windows" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Debug\TcHmiCSharpBridge.dll" target="runtimes\any\net8.0-windows\" />
+    <file src="bin\Debug\TcHmiCSharpBridge.Shared.dll" target="runtimes\any\net8.0-windows\" />
+    <file src="bin\Debug\TcHmiCSharpBridge.*.json" target="runtimes\any\net8.0-windows\" />
+  </files>
+</package>

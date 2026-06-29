@@ -5,6 +5,7 @@ const PLC_MAPPED_PREFIX = `ADS.${PLC_DOMAIN}.${PLC_GVL}`;
 const PLC_ACTIVE_COUNT_SYMBOL = `${PLC_MAPPED_PREFIX}.nActiveRowCount`;
 const PLC_COMMIT_SYMBOL = `${PLC_MAPPED_PREFIX}.bCommitRequested`;
 const PLC_ROW_FIELDS = ["nIndex", "sName", "lrValue", "bEnabled", "sUnit", "sSource"];
+const PLC_WRITABLE_ROW_FIELDS = ["lrValue", "bEnabled"];
 const EXTENSION_SYMBOL = "TcHmiCSharpBridge.Variables";
 const STATUS_ID = "BridgeStatus";
 const GRID_ID = "VariableGrid";
@@ -85,43 +86,6 @@ function plcRowSymbol(rowNumber, fieldName) {
     return `${PLC_MAPPED_PREFIX}.aRows.${rowNumber - 1}.${fieldName}`;
 }
 
-function readSymbol(symbolName) {
-    return new Promise((resolve, reject) => {
-        TcHmi.Server.readSymbol(symbolName, (data) => {
-            const result = data?.results?.[0];
-            if (data?.error === TcHmi.Errors.NONE && result?.error === TcHmi.Errors.NONE) {
-                resolve(result.value);
-                return;
-            }
-
-            reject(new Error(`Read failed: ${symbolName} (${formatError(data, result)})`));
-        });
-    });
-}
-
-function clampRowCount(value) {
-    const count = Number(value);
-    if (!Number.isFinite(count)) {
-        return PLC_ROW_COUNT;
-    }
-
-    return Math.max(0, Math.min(PLC_ROW_COUNT, Math.trunc(count)));
-}
-
-function writeSymbol(symbolName, value) {
-    return new Promise((resolve, reject) => {
-        TcHmi.Server.writeSymbol(symbolName, value, (data) => {
-            const result = data?.results?.[0];
-            if (data?.error === TcHmi.Errors.NONE && (result === undefined || result.error === TcHmi.Errors.NONE)) {
-                resolve();
-                return;
-            }
-
-            reject(new Error(`Write failed: ${symbolName} (${formatError(data, result)})`));
-        });
-    });
-}
-
 function formatError(data, result) {
     const detail = result?.details ?? data?.details ?? data?.response?.error ?? result?.error ?? data?.error;
     if (typeof detail === "string") {
@@ -141,6 +105,43 @@ function formatError(data, result) {
     }
 
     return "unknown error";
+}
+
+function readSymbol(symbolName) {
+    return new Promise((resolve, reject) => {
+        TcHmi.Server.readSymbol(symbolName, (data) => {
+            const result = data?.results?.[0];
+            if (data?.error === TcHmi.Errors.NONE && result?.error === TcHmi.Errors.NONE) {
+                resolve(result.value);
+                return;
+            }
+
+            reject(new Error(`Read failed: ${symbolName} (${formatError(data, result)})`));
+        });
+    });
+}
+
+function writeSymbol(symbolName, value) {
+    return new Promise((resolve, reject) => {
+        TcHmi.Server.writeSymbol(symbolName, value, (data) => {
+            const result = data?.results?.[0];
+            if (data?.error === TcHmi.Errors.NONE && (result === undefined || result.error === TcHmi.Errors.NONE)) {
+                resolve();
+                return;
+            }
+
+            reject(new Error(`Write failed: ${symbolName} (${formatError(data, result)})`));
+        });
+    });
+}
+
+function clampRowCount(value) {
+    const count = Number(value);
+    if (!Number.isFinite(count)) {
+        return PLC_ROW_COUNT;
+    }
+
+    return Math.max(0, Math.min(PLC_ROW_COUNT, Math.trunc(count)));
 }
 
 function setGridRows(rows) {
@@ -169,7 +170,7 @@ async function readPlcRow(rowNumber) {
         row[fieldName] = await readSymbol(plcRowSymbol(rowNumber, fieldName));
     }
 
-    return normalizeRows([row], rowNumber - 1)[0];
+    return normalizeRows([row])[0];
 }
 
 async function readPlcRows() {
@@ -184,41 +185,56 @@ async function readPlcRows() {
 
 async function writePlcRow(rowNumber, row) {
     const value = denormalizeRows([row])[0];
-    await writeSymbol(plcRowSymbol(rowNumber, "nIndex"), Number(value.nIndex || rowNumber));
-    await writeSymbol(plcRowSymbol(rowNumber, "sName"), value.sName);
-    await writeSymbol(plcRowSymbol(rowNumber, "lrValue"), Number(value.lrValue));
-    await writeSymbol(plcRowSymbol(rowNumber, "bEnabled"), Boolean(value.bEnabled));
-    await writeSymbol(plcRowSymbol(rowNumber, "sUnit"), value.sUnit);
-    await writeSymbol(plcRowSymbol(rowNumber, "sSource"), value.sSource || "HMI");
+    for (const fieldName of PLC_WRITABLE_ROW_FIELDS) {
+        const fieldValue = fieldName === "lrValue"
+            ? Number(value.lrValue)
+            : Boolean(value.bEnabled);
+        await writeSymbol(plcRowSymbol(rowNumber, fieldName), fieldValue);
+    }
 }
 
 async function writePlcRows(rows) {
     const clippedRows = rows.slice(0, PLC_ROW_COUNT);
-    await writeSymbol(PLC_ACTIVE_COUNT_SYMBOL, clippedRows.length);
 
     for (let rowNumber = 1; rowNumber <= clippedRows.length; rowNumber += 1) {
-        await writePlcRow(rowNumber, {
-            ...clippedRows[rowNumber - 1],
-            nIndex: rowNumber,
-            sSource: "HMI"
-        });
+        await writePlcRow(rowNumber, clippedRows[rowNumber - 1]);
     }
 
     await writeSymbol(PLC_COMMIT_SYMBOL, true);
+}
+
+async function syncExtensionFromRows(rows, source) {
+    const extensionRows = rows.map((row) => ({
+        ...row,
+        sSource: source
+    }));
+    await writeSymbol(EXTENSION_SYMBOL, toExtensionRows(extensionRows));
 }
 
 async function loadFromPlc() {
     setStatus("Reading PLC row fields...");
     const plcRows = await readPlcRows();
     setGridRows(plcRows);
-    setStatus(`Loaded ${plcRows.length} rows from ${PLC_MAPPED_PREFIX}.aRows mapped fields`);
+
+    try {
+        await syncExtensionFromRows(plcRows, "PLC");
+        setStatus(`Loaded ${plcRows.length} PLC rows and synced C# extension`);
+    } catch (error) {
+        setStatus(`Loaded ${plcRows.length} PLC rows. C# sync failed: ${error.message}`);
+    }
 }
 
 async function writeToPlc() {
     const rows = getGridRows();
     setStatus("Writing PLC row fields...");
     await writePlcRows(rows);
-    setStatus(`Wrote ${Math.min(rows.length, PLC_ROW_COUNT)} rows to ${PLC_MAPPED_PREFIX}.aRows mapped fields`);
+
+    try {
+        await syncExtensionFromRows(rows, "HMI");
+        setStatus(`Wrote ${Math.min(rows.length, PLC_ROW_COUNT)} PLC rows and synced C# extension`);
+    } catch (error) {
+        setStatus(`Wrote ${Math.min(rows.length, PLC_ROW_COUNT)} PLC rows. C# sync failed: ${error.message}`);
+    }
 }
 
 async function pushToExtension() {
@@ -227,14 +243,15 @@ async function pushToExtension() {
         sSource: "HMI"
     }));
     setStatus("Writing rows to C# extension...");
-    await writeSymbol(EXTENSION_SYMBOL, toExtensionRows(rows));
+    await syncExtensionFromRows(rows, "HMI");
     setStatus(`Wrote ${rows.length} rows to ${EXTENSION_SYMBOL}`);
 }
 
 async function pullFromExtension() {
     setStatus("Reading rows from C# extension...");
     const rows = await readSymbol(EXTENSION_SYMBOL);
-    setGridRows(normalizeRows(rows));
+    const normalizedRows = normalizeRows(rows);
+    setGridRows(normalizedRows);
     setStatus(`Loaded from ${EXTENSION_SYMBOL}`);
 }
 
@@ -269,7 +286,6 @@ function bindButton(id, handler) {
     };
 
     TcHmi.EventProvider.register(`${id}.onStatePressed`, run);
-
     bindDomButton(id, run);
 }
 
@@ -290,7 +306,10 @@ function init() {
     bindButton("WritePlcButton", writeToPlc);
     bindButton("PushExtensionButton", pushToExtension);
     bindButton("PullExtensionButton", pullFromExtension);
-    setStatus(`Bridge ready. Press Read PLC to load ${PLC_MAPPED_PREFIX}.aRows mapped fields.`);
+    setStatus(`Bridge ready. Loading ${PLC_MAPPED_PREFIX}.aRows mapped fields...`);
+    window.setTimeout(() => {
+        loadFromPlc().catch((error) => setStatus(error.message));
+    }, 300);
 }
 
 if (document.readyState === "loading") {

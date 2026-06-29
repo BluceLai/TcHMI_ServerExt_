@@ -1,0 +1,10 @@
+{
+  "$schema": "ExtensionSettings.Schema.json",
+  "guid": "1f423059-b799-4e15-870a-63e9b5dbdbaa",
+  "version": "1.0.0.0",
+  "configVersion": "1.0.0.0",
+  "policies": [
+    "StrictPropertyValidation",
+    "StrictConfigListenerFilter"
+  ]
+}

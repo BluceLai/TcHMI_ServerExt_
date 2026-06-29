@@ -13,7 +13,7 @@ public static class BridgeStore
     public static string DataFilePath =>
         Environment.GetEnvironmentVariable("TCHMI_BRIDGE_DATA_PATH")
         ?? Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
             "TcHmiCSharpBridge",
             "variables.json");
 
@@ -57,7 +57,11 @@ public static class BridgeStore
             new() { Index = 1, Name = "SpeedSetpoint", Value = 120.0, Enabled = true, Unit = "mm/s", Source = "CSharp" },
             new() { Index = 2, Name = "PressureLimit", Value = 5.5, Enabled = true, Unit = "bar", Source = "CSharp" },
             new() { Index = 3, Name = "BatchCount", Value = 12.0, Enabled = true, Unit = "pcs", Source = "CSharp" },
-            new() { Index = 4, Name = "Temperature", Value = 36.5, Enabled = false, Unit = "degC", Source = "CSharp" }
+            new() { Index = 4, Name = "Temperature", Value = 36.5, Enabled = false, Unit = "degC", Source = "CSharp" },
+            new() { Index = 5, Name = "VacuumLevel", Value = -0.65, Enabled = true, Unit = "bar", Source = "CSharp" },
+            new() { Index = 6, Name = "CycleDelay", Value = 250.0, Enabled = false, Unit = "ms", Source = "CSharp" },
+            new() { Index = 7, Name = "RetryLimit", Value = 3.0, Enabled = true, Unit = "count", Source = "CSharp" },
+            new() { Index = 8, Name = "RecipeNumber", Value = 1.0, Enabled = true, Unit = "id", Source = "CSharp" }
         ];
     }
 

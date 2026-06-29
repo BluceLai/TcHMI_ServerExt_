@@ -51,6 +51,17 @@
             "REQUIRED": true,
             "STARTUPTYPE": 1
         },
+        "TcHmiCSharpBridge": {
+            "ENABLED": true,
+            "METADATA": {
+                "migrationVersion": "1.14"
+            },
+            "NAME": "TcHmiCSharpBridge",
+            "PATH": "TcHmiCSharpBridge\\",
+            "PROCESSID": -1,
+            "REQUIRED": false,
+            "STARTUPTYPE": 1
+        },
         "TcHmiLua": {
             "ENABLED": true,
             "METADATA": {
@@ -4593,6 +4604,48 @@
                 ]
             },
             "USEMAPPING": true
+        },
+        "TcHmiCSharpBridge.Variables": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiCSharpBridge",
+            "DYNAMIC": false,
+            "MAPPING": "Variables",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "Index": {
+                            "type": "integer"
+                        },
+                        "Name": {
+                            "type": "string"
+                        },
+                        "Value": {
+                            "type": "number"
+                        },
+                        "Enabled": {
+                            "type": "boolean"
+                        },
+                        "Unit": {
+                            "type": "string"
+                        },
+                        "Source": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "Index",
+                        "Name",
+                        "Value",
+                        "Enabled",
+                        "Unit",
+                        "Source"
+                    ]
+                }
+            },
+            "USEMAPPING": true
         }
     },
     "SYMBOL_COMPLEXITY_LIMIT": 100,
@@ -4606,7 +4659,9 @@
             "FILEACCESS": 3,
             "FILES": {},
             "SYMBOLACCESS": 3,
-            "SYMBOLS": {}
+            "SYMBOLS": {
+                "TcHmiCSharpBridge.Variables": 3
+            }
         },
         "__SystemGuests": {
             "ENABLED": true,
@@ -4735,7 +4790,8 @@
                 "ADS.PLC1.HMI.aRows.7.lrValue": 3,
                 "ADS.PLC1.HMI.aRows.7.bEnabled": 3,
                 "ADS.PLC1.HMI.aRows.7.sUnit": 3,
-                "ADS.PLC1.HMI.aRows.7.sSource": 3
+                "ADS.PLC1.HMI.aRows.7.sSource": 3,
+                "TcHmiCSharpBridge.Variables": 3
             }
         }
     },

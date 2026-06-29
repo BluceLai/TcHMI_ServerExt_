@@ -29,7 +29,7 @@ The HMI reads and writes TwinCAT HMI mapped symbols, not raw PLC symbol names. T
 3. Add/deploy the generated C# extension DLL through TwinCAT HMI Server Extension configuration if it is not picked up automatically by your engineering environment.
 4. Build and run the TwinCAT HMI project.
 
-The DataGrid uses indirect editing. Press `Write PLC` after editing rows to write the values back to `HMI.aRows[*]` fields.
+The DataGrid uses indirect editing. Press `Write PLC` after editing rows to write editable values back to PLC. PLC write-back intentionally updates `lrValue` and `bEnabled` only; `sName`, `sUnit`, index, and source are treated as PLC metadata.
 
 ## C# UI
 
@@ -40,8 +40,9 @@ Run `TcHmiCSharpBridge.Ui` from Visual Studio to open a DataGridView for the C# 
 - `Save` writes rows to the shared bridge store.
 - TwinCAT HMI `Pull C#` reads the same rows through `TcHmiCSharpBridge.Variables`.
 - TwinCAT HMI `Push C#` writes rows back to the same store, and the C# UI can auto refresh them.
+- TwinCAT HMI `Read PLC` also syncs the PLC snapshot into `TcHmiCSharpBridge.Variables`, so the C# UI can see PLC-side changes after auto refresh or reload.
 
-By default the shared JSON file is under `%LOCALAPPDATA%\TcHmiCSharpBridge\variables.json`.
+By default the shared JSON file is under `%PROGRAMDATA%\TcHmiCSharpBridge\variables.json`, so the HMI server process and the standalone C# UI can access the same file.
 Set `TCHMI_BRIDGE_DATA_PATH` for both the HMI server process and the UI if you want a different shared location.
 
 ## HMI Live / Publish

@@ -1,1 +1,56 @@
-[]
+[
+  {
+    "serverExtensions": [
+      {
+        "publishServerExtension": true,
+        "name": "ADS"
+      },
+      {
+        "publishServerExtension": true,
+        "name": "TcHmiLua"
+      },
+      {
+        "publishServerExtension": true,
+        "name": "TcHmiSqliteLogger"
+      },
+      {
+        "publishServerExtension": true,
+        "name": "TcHmiSrv"
+      },
+      {
+        "publishServerExtension": true,
+        "name": "TcHmiCSharpBridge"
+      },
+      {
+        "publishServerExtension": true,
+        "name": "TcHmiUserManagement"
+      }
+    ],
+    "profileName": "TcHmi_SerExt",
+    "publishMode": "TcHmi",
+    "targetDirectory": "",
+    "deleteAllFilesBeforePublish": false,
+    "deleteExtensionDataBeforePublish": false,
+    "alwaysPublishLocalServerConfiguration": true,
+    "temporaryPublishWithoutServerConfiguration": false,
+    "abortOnErrors": true,
+    "createPublishLog": false,
+    "salt": "dd8119bcb15f42768311602daf37651b",
+    "encryptedTcHmiServerPassword": "UowTvZQ6DLGQSZ50wZ7AfA==",
+    "tcHmiServerHost": "localhost",
+    "tcHmiServerPort": "2020",
+    "uploadTimeout": "60",
+    "connectionTimeout": "5",
+    "requestTimeout": "60",
+    "extensionStartupTimeout": "120",
+    "clientCertificateCN": "",
+    "tcHmiUseTLS": true,
+    "useClientCertificate": false,
+    "launchBrowserAfterPublish": true,
+    "createVirtualDirectoriesOnTargetSystem": false,
+    "tcHmiServerUserName": "__SystemAdministrator",
+    "tcHmiDestinationUrl": "https://localhost:2020/",
+    "publishConfiguration": "remote",
+    "tcHmiIgnoreCertificateErrors": true
+  }
+]
